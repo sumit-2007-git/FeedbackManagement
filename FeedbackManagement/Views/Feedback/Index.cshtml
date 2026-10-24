@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<FeedbackManagement.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-3">Feedback Form</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="card p-4 mb-4">
+    @Html.Partial("_FeedbackForm",
+            new FeedbackManagement.Models.Feedback())
+</div>
+
+<h3>Submitted Feedback</h3>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Rating</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Rating / 5</td>
+                <td>@item.Comments</td>
+            </tr>
+        }
+    </tbody>
+</table>
